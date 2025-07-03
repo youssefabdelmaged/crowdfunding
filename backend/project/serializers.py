@@ -3,7 +3,6 @@ from .models import Project
 from datetime import date
 
 class ProjectModelSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Project
         fields = '__all__'
@@ -15,12 +14,12 @@ class ProjectModelSerializer(serializers.ModelSerializer):
         target = attrs.get('target_amount')
         currency = attrs.get('currency')
 
-        if not start or start < date.today():
+        if start and start < date.today():
             raise serializers.ValidationError({
                 "start_date": "Start date must be today or a future date."
             })
 
-        if not start or not end or start >= end:
+        if start and end and start >= end:
             raise serializers.ValidationError({
                 "end_date": "End date must be after start date."
             })

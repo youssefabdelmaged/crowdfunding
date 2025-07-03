@@ -35,7 +35,6 @@ const App = () => {
             </ProtectedRoute>
           }
           />
-        <Route path="/list-projects" element={<ListProjects />} />
         <Route path="/login" element={<Login  />} />
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />} />
