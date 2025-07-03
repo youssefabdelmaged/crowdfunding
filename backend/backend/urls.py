@@ -1,9 +1,9 @@
-
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 from api.views import CreateUserView, UserListView, MyTokenObtainPairView
 from project.views import *
+# from .views import ProjectListCreateView, ProjectDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,4 +14,5 @@ urlpatterns = [
     path('api/', include('api.urls')),
     path('api/users/', UserListView.as_view(), name='user-list'),
     path('api/projects/', ProjectListCreateView.as_view(), name='create_project'),
+    path('api/projects/<int:pk>/', ProjectDetailView.as_view(), name='project-detail'),
 ]

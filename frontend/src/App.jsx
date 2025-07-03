@@ -7,6 +7,10 @@ import NotFound from "./pages/NotFound";
 import Register from "./pages/Register";
 import CreateProject from './pages/CreateProject';
 import ListProjects from './pages/ListProjects';
+import ViewProjectDetails from './pages/ViewProjectDetails';
+
+
+
 
 
 const RegisterAndLogout = () => {
@@ -35,8 +39,21 @@ const App = () => {
             </ProtectedRoute>
           }
           />
+        <Route
+          path="/list-projects"
+          element={
+              <ListProjects />
+          }
+        />
+        <Route
+          path="/view-project-details"
+          element={
+              <ViewProjectDetails />
+          }
+        />
         <Route path="/login" element={<Login  />} />
         <Route path="/register" element={<RegisterAndLogout />} />
+        <Route path="/projects/:id" element={<ViewProjectDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

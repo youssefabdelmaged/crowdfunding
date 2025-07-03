@@ -31,3 +31,4 @@ class UserSerializer(serializers.ModelSerializer):
             return user
         except Exception as e:
             raise serializers.ValidationError({"detail": str(e)})
+

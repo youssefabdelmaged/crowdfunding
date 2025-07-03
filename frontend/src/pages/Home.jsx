@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import ListAllProjects from "../components/ListAllProjects";
+import "../assets/styles/projects.css";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,6 +23,7 @@ const Home = () => {
         <button className="create-button" onClick={handleCreate}> Create Project</button>
       </div>
       <h1 className="welcome">Welcome to the Home Page</h1>
+      <ListAllProjects />
     </>
   );
 };
