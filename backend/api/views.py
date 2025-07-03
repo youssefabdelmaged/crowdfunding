@@ -12,7 +12,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 # Create your views here.
 
 
-class createUserView(generics.CreateAPIView):
+class CreateUserView(generics.CreateAPIView):
     """
     View to create a new user.
     """
