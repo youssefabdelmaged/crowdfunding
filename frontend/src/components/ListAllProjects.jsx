@@ -25,6 +25,32 @@ function ListAllProjects() {
     fetchProjects();
   }, []);
 
+
+   const handleDelete=(id)=>{
+      const token = localStorage.getItem("access");
+      // console.log(token);
+      
+
+        api.delete(`/api/delete/${id}/`
+          ,{
+            // method: 'DELETE',
+            headers: {
+            Authorization: `Bearer ${token}`
+        }
+        }
+      )
+        .then((res)=>{
+            if (res.status===204){
+                const restOfProjects=projects.filter(project => project.id !== id)
+                setProjects (restOfProjects)
+            }
+        })
+        .catch((err)=>{
+            alert ("Failed to delete project")
+        })
+    }
+
+
   return (
     <div className="project-list-container">
       <h1>List of Projects</h1>
@@ -40,7 +66,7 @@ function ListAllProjects() {
           <div className="project-card-buttons">
             <button onClick={() => navigate(`/projects/${project.id}`)}>View</button>
             <button>Edit</button>
-            <button>Delete</button>
+            <button onClick={()=>handleDelete(project.id)}>Delete</button>
           </div>
         </div>
       ))}
