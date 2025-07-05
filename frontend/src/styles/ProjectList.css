@@ -1,0 +1,26 @@
+.project-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 123, 255, 0.15);
+}
+
+.fancy-card {
+  background: linear-gradient(135deg, #ffffff, #f3f7fd);
+  border-radius: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.fancy-card:hover {
+  transform: translateY(-7px);
+  box-shadow: 0 0.75rem 1.5rem rgba(0, 123, 255, 0.2);
+}
+
+.text-gradient {
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

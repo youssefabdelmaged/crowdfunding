@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import api from '../api'
 import {useNavigate} from 'react-router-dom'
+import '../styles/ProjectList.css';
+
 
 /**
  * ListAllProjects component
@@ -33,44 +35,50 @@ function ListAllProjects() {
 
         api.delete(`/api/delete/${id}/`
           ,{
-            // method: 'DELETE',
             headers: {
             Authorization: `Bearer ${token}`
-        }
-        }
-      )
+        }})
         .then((res)=>{
             if (res.status===204){
                 const restOfProjects=projects.filter(project => project.id !== id)
                 setProjects (restOfProjects)
-            }
-        })
+            }})
         .catch((err)=>{
             alert ("Failed to delete project")
-        })
-    }
+        })}
 
 
   return (
-    <div className="project-list-container">
-      <h1>List of Projects</h1>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {projects.map((project) => (
-        <div key={project.id} className="project-card">
-          {/* Project details */}
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <p>Target Amount: {project.target_amount} {project.currency}</p>
-          <p>Duration: {project.start_date} to {project.end_date}</p>
-          {/* Navigation buttons */}
-          <div className="project-card-buttons">
-            <button onClick={() => navigate(`/projects/${project.id}`)}>View</button>
-            <button>Edit</button>
-            <button onClick={()=>handleDelete(project.id)}>Delete</button>
+   
+    <div className="container py-5">
+      <h1 className="text-center fw-bold mb-5 display-5 text-gradient">🚀 List of Projects</h1>
+
+      {error && <p className="text-danger text-center">{error}</p>}
+
+      <div className="row g-4">
+        {projects.map(project => (
+          <div key={project.id} className="col-sm-12 col-md-6 col-lg-4">
+            <div className="fancy-card p-4 shadow-sm h-100 d-flex flex-column">
+              <div className="mb-3">
+                <h4 className="fw-bold">{project.title}</h4>
+                <p className="text-muted mb-2">{project.description}</p>
+                <p className="mb-1"><i className="bi bi-cash-coin me-1"></i><strong>Target:</strong> {project.target_amount} {project.currency}</p>
+                <p><i className="bi bi-calendar-event me-1"></i><strong>Duration:</strong> {project.start_date} → {project.end_date}</p>
+              </div>
+              <div className="mt-auto d-flex justify-content-between gap-2">
+                <button onClick={() => navigate(`/projects/${project.id}`)} className="btn btn-primary btn-sm w-100">View</button>
+
+                {/* <button className="btn btn-warning btn-sm w-100">Edit</button> */}
+                
+                <button onClick={() => handleDelete(project.id)} className="btn btn-danger btn-sm w-100">Delete</button>
+              </div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
+
+
   )
 }
 
