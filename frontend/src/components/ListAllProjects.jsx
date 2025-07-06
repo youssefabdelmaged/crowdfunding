@@ -27,27 +27,6 @@ function ListAllProjects() {
     fetchProjects();
   }, []);
 
-
-   const handleDelete=(id)=>{
-      const token = localStorage.getItem("access");
-      // console.log(token);
-      
-
-        api.delete(`/api/delete/${id}/`
-          ,{
-            headers: {
-            Authorization: `Bearer ${token}`
-        }})
-        .then((res)=>{
-            if (res.status===204){
-                const restOfProjects=projects.filter(project => project.id !== id)
-                setProjects (restOfProjects)
-            }})
-        .catch((err)=>{
-            alert ("Failed to delete project")
-        })}
-
-
   return (
    
     <div className="container py-5">
@@ -68,9 +47,7 @@ function ListAllProjects() {
               <div className="mt-auto d-flex justify-content-between gap-2">
                 <button onClick={() => navigate(`/projects/${project.id}`)} className="btn btn-primary btn-sm w-100">View</button>
 
-                {/* <button className="btn btn-warning btn-sm w-100">Edit</button> */}
-                
-                <button onClick={() => handleDelete(project.id)} className="btn btn-danger btn-sm w-100">Delete</button>
+                {/* <button className="btn btn-warning btn-sm w-100">Edit</button> */}                
               </div>
             </div>
           </div>
