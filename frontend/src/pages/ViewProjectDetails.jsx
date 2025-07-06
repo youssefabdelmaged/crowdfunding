@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
 import "../assets/styles/projectDetails.css";
+import { getLoggedInUserId } from '../components/ProtectedRoute'; 
+import { ACCESS_TOKEN } from '../constants';  
 
 /**
  * ViewProjectDetails component
@@ -13,6 +15,8 @@ function ViewProjectDetails() {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isOwner = project?.owner === getLoggedInUserId();
+  const token = localStorage.getItem(ACCESS_TOKEN);
 
   // Fetch project details when component mounts or ID changes
   useEffect(() => {
@@ -28,6 +32,20 @@ function ViewProjectDetails() {
     };
     fetchProject();
   }, [id]);
+
+  const handleDelete=(id)=>{
+        api.delete(`/api/delete/${id}/`
+          ,{
+            headers: {
+            Authorization: `Bearer ${token}`
+        }})
+        .then((res)=>{
+            if (res.status===204){
+                navigate('/')
+            }})
+        .catch((err)=>{
+            alert ("Failed to delete project")
+        })}
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
@@ -52,8 +70,8 @@ function ViewProjectDetails() {
         <p><strong>Owner:</strong> {project.owner}</p>
         {/* Edit and Delete buttons (no functionality yet) */}
         <div className="project-details-buttons">
-          <button>Edit</button>
-          <button>Delete</button>
+          {isOwner && <button onClick={() => navigate(`/projects/${project.id}/update`)}>Update</button>}
+          {isOwner && <button onClick={() => handleDelete(project.id)} className="btn btn-danger">Delete</button>}
         </div>
       </div>
     </div>
