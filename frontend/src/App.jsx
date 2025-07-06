@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import CreateProject from './pages/CreateProject';
 import ListProjects from './pages/ListProjects';
 import ViewProjectDetails from './pages/ViewProjectDetails';
-
+import UpdateProject from "./pages/UpdateProject";
 
 
 
@@ -55,6 +55,14 @@ const App = () => {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="/projects/:id" element={<ViewProjectDetails />} />
         <Route path="*" element={<NotFound />} />
+        <Route
+          path="/projects/:id/update"
+          element={
+            <ProtectedRoute>
+              <UpdateProject />
+            </ProtectedRoute>
+          }
+          />
       </Routes>
     </BrowserRouter>
   );

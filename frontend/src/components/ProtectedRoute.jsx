@@ -55,4 +55,15 @@ const ProtectedRoute = ({ children }) => {
   return isAuthorized ? children : <Navigate to="/login" />;
 };
 
+export function getLoggedInUserId() {
+    const token = localStorage.getItem(ACCESS_TOKEN);  
+    if (!token) return null;
+    try {
+        const decoded = jwtDecode(token);
+        return decoded.user_id; 
+    } catch (e) {
+        return null;
+    }
+}
+
 export default ProtectedRoute;

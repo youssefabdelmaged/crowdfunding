@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import api from '../api';
 import { useParams, useNavigate } from 'react-router-dom';
 import "../assets/styles/projectDetails.css";
+import { getLoggedInUserId } from '../components/ProtectedRoute'; 
 
 /**
  * ViewProjectDetails component
@@ -13,6 +14,7 @@ function ViewProjectDetails() {
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isOwner = project?.owner === getLoggedInUserId();
 
   // Fetch project details when component mounts or ID changes
   useEffect(() => {
@@ -52,7 +54,7 @@ function ViewProjectDetails() {
         <p><strong>Owner:</strong> {project.owner}</p>
         {/* Edit and Delete buttons (no functionality yet) */}
         <div className="project-details-buttons">
-          <button>Edit</button>
+          {isOwner && <button onClick={() => navigate(`/projects/${project.id}/update`)}>Update</button>}
           <button>Delete</button>
         </div>
       </div>
