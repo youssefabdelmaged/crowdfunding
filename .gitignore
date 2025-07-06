@@ -1,2 +1,11 @@
 # Ignore Python virtual environment folder
 env/
+
+# Ignore the ignore file itself
+.gitignore
+
+# Ignore Python cache files
+__pycache__/
+
+# Ignore node_modules folder
+node_modules/
