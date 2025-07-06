@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated,AllowAny
 from .serializers import ProjectModelSerializer
 from rest_framework.decorators import api_view
@@ -12,15 +12,15 @@ class ProjectListCreateView(generics.ListCreateAPIView):
     serializer_class = ProjectModelSerializer
     permission_classes = [IsAuthenticated]
 
-    # def get_permissions(self):
-    #     if self.request.method in ['POST']:
-    #         return [permission() for permission in self.permission_classes]
-    #     return super().get_permissions()
-
     def get_permissions(self):
-        if self.request.method == 'POST':
-            return [IsAuthenticated()]
-        return [AllowAny()]
+        if self.request.method in ['POST']:
+            return [permission() for permission in self.permission_classes]
+        return super().get_permissions()
+
+    # def get_permissions(self):
+    #     if self.request.method == 'POST':
+    #         return [IsAuthenticated()]
+    #     return [AllowAny()]
 
 
     def perform_create(self, serializer):
