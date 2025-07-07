@@ -1,5 +1,5 @@
 from rest_framework import generics, status
-from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 
 from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated
@@ -57,3 +57,16 @@ def delete_project(request, id):
         return Response(data={"msg": f"project with id: {id}  deleted successfully"}, status=status.HTTP_204_NO_CONTENT)
     else:
         return Response({"error": "not allowed"}, status=status.HTTP_403_FORBIDDEN)
+
+from rest_framework.permissions import BasePermission
+
+class IsOwner(BasePermission):
+    def has_object_permission(self, request, view, obj):
+        return obj.owner == request.user
+    
+class ProjectUpdateView(generics.UpdateAPIView):
+    serializer_class = ProjectModelSerializer
+    permission_classes = [IsOwner]
+
+    def get_queryset(self):
+        return Project.objects.filter(owner=self.request.user)
