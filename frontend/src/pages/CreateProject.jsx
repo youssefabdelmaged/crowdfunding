@@ -58,7 +58,6 @@ const handleSubmit = async (e) => {
 
 
   const handleHome = () => {
-    localStorage.clear();
     navigate('/');
   };
 
