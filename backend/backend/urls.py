@@ -19,4 +19,5 @@ urlpatterns = [
     path('api/delete/<int:id>/', delete_project, name='project-detail'),
     path('api/projects/<int:pk>/update/',
          ProjectUpdateView.as_view(), name='project_update'),
+
 ]
