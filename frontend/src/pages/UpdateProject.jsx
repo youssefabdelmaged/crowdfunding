@@ -31,7 +31,7 @@ export default function UpdateProject() {
 
 
     const handleHome = () => {
-        localStorage.clear();
+    
         navigate('/');
     };
 
