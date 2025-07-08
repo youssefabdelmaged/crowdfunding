@@ -24,6 +24,7 @@ const Home = () => {
       </div>
       <h1 className="welcome">Welcome to the Home Page</h1>
       <ListAllProjects />
+      
     </>
   );
 };

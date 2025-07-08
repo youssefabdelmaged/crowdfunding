@@ -37,12 +37,53 @@ class ProjectListCreateView(generics.ListCreateAPIView):
         return Response(serializer.data)
 
 # View for retrieving details of a single project by ID
-
+#  def get_queryset(self):
+#         start_date = self.request.query_params.get('start_date')
+#         end_date = self.request.query_params.get('end_date')
+#         if start_date and end_date:
+#             queryset = Project.objects.filter(date__range=[start_date, end_date])
+#             if not queryset.exists():
+#                 project_id = self.request.query_params.get('id')
+#                 if project_id:
+#                     return Project.objects.filter(id=project_id)
+#                 return Project.objects.none()
+#             return queryset
+#         return Project.objects.all()
 
 class ProjectDetailView(generics.RetrieveAPIView):
     queryset = Project.objects.all()
     serializer_class = ProjectModelSerializer
     permission_classes = [IsAuthenticated]
+
+
+
+
+
+
+
+
+
+class ProjectSearchView(generics.ListAPIView):
+    serializer_class = ProjectModelSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        start_date = self.request.query_params.get('start_date')
+        end_date = self.request.query_params.get('end_date')
+
+        if start_date and end_date:
+            queryset = Project.objects.filter(start_date__gte=start_date, end_date__lte=end_date)
+            if not queryset.exists():
+                project_id = self.request.query_params.get('id')
+                if project_id:
+                    return Project.objects.filter(id=project_id)
+                return Project.objects.none()
+            return queryset
+
+        return Project.objects.all()
+
+
+
 
 
 @api_view(["DELETE", "GET"])

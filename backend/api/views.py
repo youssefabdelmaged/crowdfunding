@@ -8,6 +8,9 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 # from rest_framework.views import APIView
 # Create your views here.
 
@@ -22,14 +25,18 @@ class CreateUserView(generics.CreateAPIView):
 
 # Get api to list all users
 
-
-class UserListView(generics.ListAPIView):
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def user_detail_view(request, pk=None):
     """
-    View to list all users.
+    API view to get a user by id.
     """
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
-    permission_classes = [IsAuthenticated]
+    try:
+        user = User.objects.get(id=pk)
+        serializer = UserSerializer(user)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except User.DoesNotExist:
+        return Response({"detail": "User not found."}, status=status.HTTP_404_NOT_FOUND)
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
