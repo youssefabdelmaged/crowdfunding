@@ -2,6 +2,7 @@ import { useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import { fetchAndStoreCurrentUser } from "../utils/auth";
 import "../assets/styles/form.css";
 
 const Form = ({ route, method }) => {
@@ -44,6 +45,7 @@ const Form = ({ route, method }) => {
       if (method === "login") {
         localStorage.setItem(ACCESS_TOKEN, response.data.access);
         localStorage.setItem(REFRESH_TOKEN, response.data.refresh);
+        await fetchAndStoreCurrentUser();
         navigate("/");
       } else {
         navigate("/login");
