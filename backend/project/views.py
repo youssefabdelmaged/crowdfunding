@@ -1,6 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, BasePermission
-
+from django.utils.dateparse import parse_date
 from rest_framework import status, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
@@ -68,22 +68,25 @@ class ProjectSearchView(generics.ListAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        start_date = self.request.query_params.get('start_date')
-        end_date = self.request.query_params.get('end_date')
+        start_raw = self.request.GET.get('start_date')
+        end_raw = self.request.GET.get('end_date')
 
-        if start_date and end_date:
-            queryset = Project.objects.filter(start_date__gte=start_date, end_date__lte=end_date)
-            if not queryset.exists():
-                project_id = self.request.query_params.get('id')
-                if project_id:
-                    return Project.objects.filter(id=project_id)
-                return Project.objects.none()
-            return queryset
+        start_param = parse_date(start_raw) if start_raw else None
+        end_param = parse_date(end_raw) if end_raw else None
 
-        return Project.objects.all()
+        queryset = Project.objects.all()
 
+        if start_param and end_param:
+            queryset = queryset.filter(
+                start_date__gte=start_param,
+                end_date__lte=end_param
+            )
+        elif start_param:
+            queryset = queryset.filter(start_date__gte=start_param)
+        elif end_param:
+            queryset = queryset.filter(end_date__lte=end_param)
 
-
+        return queryset
 
 
 @api_view(["DELETE", "GET"])
@@ -102,7 +105,7 @@ def delete_project(request, id):
 class IsOwner(BasePermission):
     def has_object_permission(self, request, view, obj):
         return obj.owner == request.user
-    
+
 class ProjectUpdateView(generics.UpdateAPIView):
     serializer_class = ProjectModelSerializer
     permission_classes = [IsOwner]
