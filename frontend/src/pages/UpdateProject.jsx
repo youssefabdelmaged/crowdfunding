@@ -96,6 +96,7 @@ export default function UpdateProject() {
             value={project.target_amount}
             onChange={handleChange}
             required
+            min="1"
           />
           <br></br>
           <label>Currency</label>
