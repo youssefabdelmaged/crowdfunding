@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getLoggedInUserId } from '../components/ProtectedRoute'; 
 import api from "../api";
+// import { handleDelete } from "./ViewProjectDetails";
 
 const SearchByDate = () => {
     
@@ -32,6 +33,23 @@ const SearchByDate = () => {
       });
   }, []);
 
+  const handleDelete = (id) => {
+  api
+  .delete(`/api/delete/${id}/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((res) => {
+    if (res.status === 204) {
+      navigate("/");
+    }
+  })
+  .catch(() => {
+    alert("Failed to delete project");
+  });
+};
+
   return (
     <div style={{ padding: "30px" }}>
       <h2>Search Projects in the duration from: {startDate} to {endDate}</h2>
@@ -52,7 +70,7 @@ const SearchByDate = () => {
                   onClick={() => navigate(`/projects/${project.id}?start_date=${startDate}&end_date=${endDate}`)}>
                   View
                 </button>
-                {isOwner && (
+                {/* {isOwner && (
                     <>
                 <button
                   className="button btn btn-warning"
@@ -63,11 +81,11 @@ const SearchByDate = () => {
                 <button
                   className="button btn btn-danger"
                   style={{ height:"40px" }}
-                  onClick={() => navigate(`/projects/${project.id}/delete?start_date=${startDate}&end_date=${endDate}`)}>
+                  onClick={() => handleDelete(project.id, navigate, localStorage.getItem("access_token"))}>
                   Delete
                 </button>
                 </>
-                )}
+                )} */}
               </div>
             </div>)
 })}

@@ -5,6 +5,9 @@ import "../assets/styles/projectDetails.css";
 import { getLoggedInUserId } from "../components/ProtectedRoute";
 import { ACCESS_TOKEN } from "../constants";
 
+
+
+
 function ViewProjectDetails() {
   const { id } = useParams(); // Get project ID from URL
   const navigate = useNavigate();
@@ -30,21 +33,23 @@ function ViewProjectDetails() {
   }, [id]);
 
   const handleDelete = (id) => {
-    api
-      .delete(`/api/delete/${id}/`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        if (res.status === 204) {
-          navigate("/");
-        }
-      })
-      .catch(() => {
-        alert("Failed to delete project");
-      });
-  };
+  api
+  .delete(`/api/delete/${id}/`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((res) => {
+    if (res.status === 204) {
+      navigate("/");
+    }
+  })
+  .catch(() => {
+    alert("Failed to delete project");
+  });
+};
+
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: "red" }}>{error}</p>;
@@ -84,7 +89,7 @@ function ViewProjectDetails() {
           )}
           {isOwner && (
             <button
-              onClick={() => handleDelete(project.id)}
+              onClick={() => handleDelete(project.id,"/")}
               className="btn btn-danger"
             >
               Delete
