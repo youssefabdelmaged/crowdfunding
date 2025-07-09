@@ -7,6 +7,21 @@ import "../assets/styles/projectDetails.css";
  * ViewProjectDetails component
  * Fetches and displays details for a single project by ID.
  */
+export const handleDelete=(id,navigate, token)=>{
+        api.delete(`/api/delete/${id}/`
+          ,{
+            headers: {
+            Authorization: `Bearer ${token}`
+        }})
+        .then((res)=>{
+            if (res.status===204){
+                navigate('/')
+            }})
+        .catch((err)=>{
+            alert ("Failed to delete project")
+        })}
+
+      
 function ViewProjectDetails() {
   const { id } = useParams(); // Get project ID from URL
   const navigate = useNavigate();
@@ -29,6 +44,11 @@ function ViewProjectDetails() {
     fetchProject();
   }, [id]);
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
   if (!project) return <p>No project found.</p>;

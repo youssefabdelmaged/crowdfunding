@@ -8,7 +8,12 @@ import Register from "./pages/Register";
 import CreateProject from './pages/CreateProject';
 import ListProjects from './pages/ListProjects';
 import ViewProjectDetails from './pages/ViewProjectDetails';
+<<<<<<< Updated upstream
 
+=======
+import UpdateProject from "./pages/UpdateProject";
+import SearchByDate from "./pages/SearchByDate";
+>>>>>>> Stashed changes
 
 
 
@@ -55,6 +60,25 @@ const App = () => {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="/projects/:id" element={<ViewProjectDetails />} />
         <Route path="*" element={<NotFound />} />
+<<<<<<< Updated upstream
+=======
+        <Route
+          path="/projects/:id/update"
+          element={
+            <ProtectedRoute>
+              <UpdateProject />
+            </ProtectedRoute>
+          }
+          />
+          <Route
+            path="/search-results"
+            element={
+              <ProtectedRoute>
+                <SearchByDate />
+              </ProtectedRoute>
+            }
+          />
+>>>>>>> Stashed changes
       </Routes>
     </BrowserRouter>
   );
