@@ -27,7 +27,7 @@ const SearchByDate = () => {
       .then((res) => {
         setProjects(res.data);
       })
-      .catch((err) => {
+      .catch(() => {
         alert("Failed to fetch search results");
       });
   }, []);

@@ -74,15 +74,6 @@ function ListAllProjects() {
                 >
                   View
                 </button>
-
-                {/* <button className="btn btn-warning btn-sm w-100">Edit</button> */}
-
-                <button
-                  onClick={() => handleDelete(project.id)}
-                  className="btn btn-danger btn-sm w-100"
-                >
-                  Delete
-                </button>
               </div>
             </div>
           </div>
