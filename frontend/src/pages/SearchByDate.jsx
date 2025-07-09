@@ -51,44 +51,45 @@ const SearchByDate = () => {
 };
 
   return (
-    <div style={{ padding: "30px" }}>
-      <h2>Search Projects in the duration from: {startDate} to {endDate}</h2>
+    <div className="container py-5">
+      <div style={{ display: 'flex', justifyContent: 'flex-end', paddingBottom: '16px' }}>
+        <button className="btn btn-primary ms-2" onClick={() => navigate("/")}>Back to Home</button>
+      </div>
+      <h1 className="welcome text-center fw-bold mb-5 display-6 text-gradient">
+        🔎 Search Projects in the duration from: {startDate} to {endDate}
+      </h1>
       {projects.length === 0 ? (
-        <p>No projects found in this duration</p>
+        <p className="text-center">No projects found in this duration</p>
       ) : (
-        <div className="project-list" style={{ padding: "30px" ,display:"flex",flexWrap: "wrap",gap:"30px"}}>
+        <div className="row g-4 justify-content-center">
           {projects.map((project) => {
-            const isOwner = project.owner === getLoggedInUserId()
-            return(
-            <div key={project.id} className="project-card">
-              <h4>{project.title}</h4>
-              <p>{project.description}</p>
-              <small>{project.created_at}</small>
-              <div style={{ marginTop: "10px", display: "flex", gap: "8px" ,alignItems: "center", flexWrap: "nowrap" }}>
-                <button
-                  className="button"
-                  onClick={() => navigate(`/projects/${project.id}?start_date=${startDate}&end_date=${endDate}`)}>
-                  View
-                </button>
-                {/* {isOwner && (
-                    <>
-                <button
-                  className="button btn btn-warning"
-                  style={{ height:"40px" }}
-                  onClick={() => navigate(`/projects/${project.id}/update?start_date=${startDate}&end_date=${endDate}`)}>
-                  Edit
-                </button>
-                <button
-                  className="button btn btn-danger"
-                  style={{ height:"40px" }}
-                  onClick={() => handleDelete(project.id, navigate, localStorage.getItem("access_token"))}>
-                  Delete
-                </button>
-                </>
-                )} */}
+            const isOwner = project.owner === getLoggedInUserId();
+            return (
+              <div key={project.id} className="col-sm-12 col-md-6 col-lg-4">
+                <div className="fancy-card p-4 shadow-sm h-100 d-flex flex-column">
+                  <div className="mb-3">
+                    <h4 className="fw-bold">{project.title}</h4>
+                    <p className="text-muted mb-2">{project.description}</p>
+                    <p className="mb-1">
+                      <span className="bi bi-cash-coin me-1"> <strong>Target:</strong> {project.target_amount} {project.currency}</span>
+                    </p>
+                    <p>
+                      <span className="bi bi-calendar-event me-1"> <strong>Duration:</strong> {project.start_date} to {project.end_date}</span>
+                    </p>
+                    <small className="text-secondary">{project.created_at}</small>
+                  </div>
+                  <div className="mt-auto d-flex justify-content-between gap-2">
+                    <button
+                      className="btn btn-primary btn-sm w-100"
+                      onClick={() => navigate(`/projects/${project.id}?start_date=${startDate}&end_date=${endDate}`)}
+                    >
+                      View
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>)
-})}
+            );
+          })}
         </div>
       )}
     </div>

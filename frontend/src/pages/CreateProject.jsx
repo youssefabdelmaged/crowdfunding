@@ -78,7 +78,7 @@ const handleSubmit = async (e) => {
           <br></br>
           <label>Target-Amount</label>
           <br></br>
-          <input type="number" name="target_amount" placeholder="Target Amount" value={formData.target_amount} onChange={handleChange} required />
+          <input type="number" name="target_amount" placeholder="Target Amount" value={formData.target_amount} onChange={handleChange} required min="1"/>
           <br></br>
           <label>Currancy</label>
           <select name="currency" value={formData.currency} onChange={handleChange}>

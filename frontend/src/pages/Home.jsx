@@ -58,6 +58,7 @@ const Home = () => {
       >
         <button className="logout" onClick={handleLogout}> Log Out</button>
         <button className="create-button" onClick={handleCreate}> Create Project</button>
+        <button className="btn btn-warning ms-2" onClick={() => navigate('/list-projects')}>My Projects</button>
       </div>
       </div>
       <h1 className="welcome">Welcome to the Home Page</h1>
