@@ -24,11 +24,21 @@
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
+ 
+  .project-card-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+ 
 .project-card h2 {
   margin-top: 0;
 }
 
+
 .project-card button {
+}
+.project-card button:not(.btn) {
   margin-right: 10px;
   padding: 8px 16px;
   border: none;
@@ -39,7 +49,7 @@
   transition: background 0.2s;
 }
 
-.project-card button:last-child {
+ .project-card button:last-child {
   background: #1976d2;
 }
 
@@ -48,7 +58,18 @@
 }
 
 .project-card button:last-child:hover {
+background: #1976d2;
+}
+.project-card button:not(.btn):last-child {
+  background: #1976d2;
+}
+
+.project-card button:not(.btn):hover {
   background: #1565c0;
+}
+
+.project-card button:not(.btn):last-child:hover {
+   background: #1565c0;
 }
 
 .project-list-title {
@@ -62,3 +83,4 @@
   justify-content: space-between;
   margin-top: 16px;
 }
+ 

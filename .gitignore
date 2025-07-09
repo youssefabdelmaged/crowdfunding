@@ -1,5 +1,6 @@
 # Ignore Python virtual environment folder
 env/
+<<<<<<< HEAD
 
 # Ignore the ignore file itself
 .gitignore
@@ -9,3 +10,6 @@ __pycache__/
 
 # Ignore node_modules folder
 node_modules/
+=======
+__pycache__/
+>>>>>>> 53a96f4afa6ba7ab7cff0f3d78f3ff18bf921763

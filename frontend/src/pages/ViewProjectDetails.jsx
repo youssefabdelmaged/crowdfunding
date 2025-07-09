@@ -9,6 +9,21 @@ import { ACCESS_TOKEN } from '../constants';
  * ViewProjectDetails component
  * Fetches and displays details for a single project by ID.
  */
+export const handleDelete=(id,navigate, token)=>{
+        api.delete(`/api/delete/${id}/`
+          ,{
+            headers: {
+            Authorization: `Bearer ${token}`
+        }})
+        .then((res)=>{
+            if (res.status===204){
+                navigate('/')
+            }})
+        .catch((err)=>{
+            alert ("Failed to delete project")
+        })}
+
+      
 function ViewProjectDetails() {
   const { id } = useParams(); // Get project ID from URL
   const navigate = useNavigate();
@@ -33,6 +48,7 @@ function ViewProjectDetails() {
     fetchProject();
   }, [id]);
 
+<<<<<<< HEAD
   const handleDelete=(id)=>{
         api.delete(`/api/delete/${id}/`
           ,{
@@ -47,6 +63,13 @@ function ViewProjectDetails() {
             alert ("Failed to delete project")
         })}
 
+=======
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes
+>>>>>>> 53a96f4afa6ba7ab7cff0f3d78f3ff18bf921763
   if (loading) return <p>Loading...</p>;
   if (error) return <p style={{ color: 'red' }}>{error}</p>;
   if (!project) return <p>No project found.</p>;
