@@ -24,3 +24,66 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.custom-navbar {
+  background-color: rgba(0, 0, 0, 0.7); 
+  color: white; 
+  backdrop-filter: blur(4px); 
+}
+
+.buttons {
+  background-color: #419bfc;
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.buttons:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.footer {
+  background-color: #f8f9fa;
+  padding: 40px 20px;
+}
+
+.newsletter-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.divider {
+  height: 2px;
+  background: #ccc;
+  margin: 20px auto;
+  width: 100px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.navigation ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.navigation li {
+  margin-bottom: 8px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  padding: 8px 12px;
+  text-align: left;
+}

@@ -57,14 +57,14 @@ const handleSubmit = async (e) => {
 
 
 
-  const handleHome = () => {
-    localStorage.clear();
-    navigate('/');
-  };
+  // const handleHome = () => {
+  //   localStorage.clear();
+  //   navigate('/');
+  // };
 
   return (
     <>
-    <button onClick={handleHome} className='home-button'> Home </button>
+    {/* <button onClick={handleHome} className='home-button'> Home </button> */}
       <div className='create-form'>
         <h1>Create Project</h1>
         <form onSubmit={handleSubmit}>

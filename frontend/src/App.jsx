@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes,useLocation } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -10,15 +10,23 @@ import ViewProjectDetails from "./pages/ViewProjectDetails";
 import UpdateProject from "./pages/UpdateProject";
 
 import SearchByDate from "./pages/SearchByDate";
+import Slideshow from "./components/Slideshow";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const RegisterAndLogout = () => {
   localStorage.clear();
   return <Register />;
 };
 
-const App = () => {
+const AppContent = () => {
+  const location = useLocation();
+  const hideNavbarOn = ['/login', '/register','/create-project'];
+  const shouldHideNavbar = hideNavbarOn.includes(location.pathname);
   return (
-    <BrowserRouter>
+    <>
+    <Navbar />
+    {!shouldHideNavbar && <Slideshow /> }
       <Routes>
         <Route
           path="/"
@@ -61,6 +69,15 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer />
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <BrowserRouter>
+      <AppContent />
     </BrowserRouter>
   );
 };

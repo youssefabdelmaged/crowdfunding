@@ -4,33 +4,33 @@ import ListAllProjects from "../components/ListAllProjects";
 import "../assets/styles/projects.css";
 
 const Home = () => {
-  const navigate = useNavigate();
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [showInputs, setShowInputs] = useState(false); 
+//   const navigate = useNavigate();
+//   const [startDate, setStartDate] = useState("");
+//   const [endDate, setEndDate] = useState("");
+//   const [showInputs, setShowInputs] = useState(false); 
 
 
-  const handleLogout = () => {
-    localStorage.clear();
-    navigate("/login");
-  };
+//   const handleLogout = () => {
+//     localStorage.clear();
+//     navigate("/login");
+//   };
 
-  const handleCreate = () => {
-    navigate("/create-project");
-  };
+//   const handleCreate = () => {
+//     navigate("/create-project");
+//   };
 
-  const handleSearch = () => {
-  if (!startDate || !endDate) {
-    alert("Please select start date and end date");
-    return;
-  }
-  navigate(`/search-results?start_date=${startDate}&end_date=${endDate}`);
-};
+//   const handleSearch = () => {
+//   if (!startDate || !endDate) {
+//     alert("Please select start date and end date");
+//     return;
+//   }
+//   navigate(`/search-results?start_date=${startDate}&end_date=${endDate}`);
+// };
 
   return (
     <>
     <div style={{ display: "flex", justifyContent: "space-between", padding: "16px" }}>
-    <div style={{ display: "flex", gap: "10px" }}>
+    {/* <div style={{ display: "flex", gap: "10px" }}>
       <button className="btn btn-secondary" onClick={() => setShowInputs(!showInputs)}>
         Search by date
       </button>
@@ -52,16 +52,16 @@ const Home = () => {
           </button>
         </>
       )}
-    </div>
-      <div
+    </div> */}
+      {/* <div
         style={{ display: "flex", justifyContent: "flex-end", padding: "16px" }}
       >
         <button className="logout" onClick={handleLogout}> Log Out</button>
         <button className="create-button" onClick={handleCreate}> Create Project</button>
         <button className="btn btn-warning ms-2" onClick={() => navigate('/list-projects')}>My Projects</button>
+      </div> */}
       </div>
-      </div>
-      <h1 className="welcome">Welcome to the Home Page</h1>
+      {/* <h1 className="welcome">Welcome to the Home Page</h1> */}
       <ListAllProjects />
       
     </>

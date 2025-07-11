@@ -28,7 +28,7 @@ const ListProjects = () => {
   return (
     <>
       <div style={{ display: "flex", justifyContent: "flex-end", padding: "16px" }}>
-        <button className="btn btn-primary ms-2" onClick={() => navigate("/")}>Back to Home</button>
+        {/* <button className="btn btn-primary ms-2" onClick={() => navigate("/")}>Back to Home</button> */}
       </div>
       <h1 className="welcome text-center fw-bold mb-5 display-5 text-gradient">🚀 List of my Projects</h1>
       <div className="row g-4 justify-content-center">

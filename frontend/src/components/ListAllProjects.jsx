@@ -40,15 +40,16 @@ function ListAllProjects() {
   return (
     <div className="container py-5">
       <h1 className="text-center fw-bold mb-5 display-5 text-gradient">
-        🚀 List of Projects
+        🚀 Projects List
       </h1>
       <div>
-        <button className="sort btn btn-secondary mb-3 " onClick={handleSort}>
+        <button className="buttons ms-2 " onClick={handleSort}>
           Sort by Date
         </button>
       </div>
       {error && <p className="text-danger text-center">{error}</p>}
-
+      <br />
+      <br />
       <div className="row g-4">
         {projects.map((project) => (
           <div key={project.id} className="col-sm-12 col-md-6 col-lg-4">
